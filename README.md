@@ -14,7 +14,7 @@ This Project uses [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformer
 3. CONFLUENCE_URL [API URL for Confluence (e.g. "https://{your-company}.atlassian.net/wiki/rest/api/content")]
 4. CONFLUENCE_USERNAME [Username associated with the Token (e.g. "foo.bar@helloworld.com")]
    
-***Second***, create a `spaces.txt` file.
+***Second***, create a `spaces.txt` with the names of the spaces you would like to add from Confluence.
 E.g.:
 ```
 foo
