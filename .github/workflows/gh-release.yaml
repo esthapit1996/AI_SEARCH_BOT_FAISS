@@ -1,25 +1,57 @@
+name: Bump Version and Create Release
+
 on:
-    push:
-      branches:
-        - main
-      paths:
-        - '**/RELEASE'
-    pull_request:
-      types: [opened, synchronize]
-      branches:
-        - main
-      paths:
-        - '**/RELEASE'
-  
+  pull_request:
+    types: [opened, synchronize, closed]
+    branches:
+      - main
+
 jobs:
-    gh-release:
-        runs-on: ubuntu-latest
-        steps:
-              - uses: actions/checkout@v4
-                with:
-                    fetch-depth: 0
-              - uses: pipe-cd/actions-gh-release@v2.6.0
-                with:
-                    release_file: '**/RELEASE'
-                    token: ${{ secrets.GITHUB_TOKEN }}
-  
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      # Check if the PR is closed (merged)
+      - name: Create version bump tag
+        if: github.event.pull_request.merged == true
+        run: |
+          # Extract version from the latest tag or default to 0.0.1
+          VERSION=$(git describe --tags --abbrev=0 || echo "v0.0.0")
+          # Bump the version
+          IFS='.' read -r major minor patch <<<"${VERSION//v/}"
+          new_patch=$((patch + 1))
+          new_version="v$major.$minor.$new_patch"
+          echo "Bumping version to $new_version"
+
+          # Create the new tag
+          git tag $new_version
+          echo "DEBUG: git tag $new_version"
+          echo $new_version
+          git push origin $new_version
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: bump-version
+    if: github.event.pull_request.merged == true
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Create GitHub Release
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.bump-version.outputs.new_version }}
+          release_name: Release ${{ needs.bump-version.outputs.new_version }}
+          body: |
+            This is the release of version ${{ needs.bump-version.outputs.new_version }}.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
