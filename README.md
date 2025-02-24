@@ -1,5 +1,5 @@
 # AI_SEARCH_BOT_FAISS
-A python application to help search with your documentations with the power of AI.
+A python application to help search with your documentations from `Confluence` and `Stack Overflow for Teams` with the power of AI.
 
 This Project uses [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) with [Faiss](https://ai.meta.com/tools/faiss/) from Meta.
 
