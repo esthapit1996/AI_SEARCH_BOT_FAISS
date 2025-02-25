@@ -30,7 +30,7 @@ abunchofhooplas
 ```
 If an invalid string exists, the script does not crash and continues.
 
-#### Third Step
+### Third Step
 Install the dependencies from `requirements.txt`, then run the script `platform-ai-searchbot.py` and see the magic! :D
 
 NOTE: Make sure that the script, .env and spaces.txt file are all in the same folder!
