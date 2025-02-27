@@ -17,6 +17,7 @@ Create a `.env` file:
 5. (required) CONFLUENCE_USERNAME [Username associated with the Token (e.g. "foo.bar@helloworld.com")]
 6. (required) COMPANY_NAME [Input for {your-company} in `CONFLUENCE_URL` ]
 7. (optional, defaults to 5) NUMBER_OF_QUERIES (Number of Answers returned)
+8. (optional, defaults to -0.3) MAX_RELEVANCE_SCORE (Relevance Score in Search)
    
 ### Second Step
 Create a `spaces.txt` with the names of the spaces you would like to add from Confluence.

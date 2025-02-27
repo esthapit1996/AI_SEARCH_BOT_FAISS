@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 # Constants
 AI_MODEL = "all-MiniLM-L6-v2"
-MAX_RELEVANCE_SCORE = -0.3
+MAX_RELEVANCE_SCORE = float(os.environ.get("MAX_RELEVANCE_SCORE", -0.3)) #set default value to -0.3
 DATA_FILE = "data.json"
 NUMBER_OF_QUERIES = int(os.environ.get("NUMBER_OF_QUERIES", 5)) #set default value to 5
 

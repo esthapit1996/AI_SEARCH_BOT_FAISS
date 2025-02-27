@@ -28,7 +28,7 @@ if not STK_PAT:
 # Rest Vars
 NUMBER_OF_QUERIES = int(os.environ.get("NUMBER_OF_QUERIES", 5)) #set default value to 5
 AI_MODEL='all-MiniLM-L6-v2'
-MAX_RELEVANCE_SCORE = -0.3
+MAX_RELEVANCE_SCORE = float(os.environ.get("MAX_RELEVANCE_SCORE", -0.3)) #set default value to -0.3
 
 # Encode credentials
 auth_header = base64.b64encode(f"{CONFLUENCE_USERNAME}:{CONFLUENCE_API_TOKEN}".encode()).decode()
