@@ -26,7 +26,7 @@ if not STK_PAT:
     exit()
 
 # Rest Vars
-NUMBER_OF_QUERIES = 5
+NUMBER_OF_QUERIES = int(os.environ.get("NUMBER_OF_QUERIES", 5)) #set default value to 5
 AI_MODEL='all-MiniLM-L6-v2'
 MAX_RELEVANCE_SCORE = -0.3
 

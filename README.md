@@ -10,12 +10,13 @@ This Project uses [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformer
 ### First Step
 Create a `.env` file:
 
-1. STK_PAT [PAT for Stack Overflow Teams]
-2. TEAM_SLUG [Team Slug for Stack Overflow for Teams]
-3. CONFLUENCE_API_TOKEN [API TOKEN for Confluence]
-4. CONFLUENCE_URL [API URL for Confluence (e.g. "https://{your-company}.atlassian.net/wiki/rest/api/content")]
-5. CONFLUENCE_USERNAME [Username associated with the Token (e.g. "foo.bar@helloworld.com")]
-6. COMPANY_NAME [Input for {your-company} in `CONFLUENCE_URL` ]
+1. (required) STK_PAT [PAT for Stack Overflow Teams]
+2. (required) TEAM_SLUG [Team Slug for Stack Overflow for Teams]
+3. (required) CONFLUENCE_API_TOKEN [API TOKEN for Confluence]
+4. (required) CONFLUENCE_URL [API URL for Confluence (e.g. "https://{your-company}.atlassian.net/wiki/rest/api/content")]
+5. (required) CONFLUENCE_USERNAME [Username associated with the Token (e.g. "foo.bar@helloworld.com")]
+6. (required) COMPANY_NAME [Input for {your-company} in `CONFLUENCE_URL` ]
+7. (optional, defaults to 5) NUMBER_OF_QUERIES (Number of Answers returned)
    
 ### Second Step
 Create a `spaces.txt` with the names of the spaces you would like to add from Confluence.

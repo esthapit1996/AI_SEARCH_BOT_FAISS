@@ -2,12 +2,15 @@ import json
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Constants
-NUMBER_OF_QUERIES = 5
 AI_MODEL = "all-MiniLM-L6-v2"
 MAX_RELEVANCE_SCORE = -0.3
 DATA_FILE = "data.json"
+NUMBER_OF_QUERIES = int(os.environ.get("NUMBER_OF_QUERIES", 5)) #set default value to 5
 
 class SemanticSearch:
     def __init__(self, model_name=AI_MODEL):
