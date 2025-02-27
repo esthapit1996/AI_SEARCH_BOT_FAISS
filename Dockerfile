@@ -1,31 +1,23 @@
-# Build stage (using python:3.12-slim)
-FROM python:3.12-slim as build
+FROM ubuntu:22.04
 
 WORKDIR /app
-COPY requirements.txt .
 
-# Install build dependencies
+# Install runtime dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libmagic1 && \
-    pip install --no-cache-dir -r requirements.txt && \
-    rm -rf /var/lib/apt/lists/*
-
-
-# Final stage (runtime stage using python:3.12-slim)
-FROM python:3.12-slim
-
-WORKDIR /app
-
-# Copy only the necessary files from the build stage
-COPY --from=build /app /app
-
-# Clean up unnecessary files (e.g., build dependencies)
-RUN rm -rf /root/.cache/pip /var/lib/apt/lists/*
-
+    apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    python3-setuptools \
+    python3-wheel \
+    && rm -rf /var/lib/apt/lists/*
 # Copy application files
-COPY *.py .
-COPY .env .
-COPY spaces.txt .
 
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY *.py .env spaces.txt ./
+
+# Expose port
 EXPOSE 5000
-CMD ["python", "platform-ai-searchbot.py"]
+
+# Run the application
+CMD ["python3", "platform-ai-searchbot.py"]
