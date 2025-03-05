@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import os
 # import numpy as np
 
-load_dotenv() 
+load_dotenv(override=True)
 
 # Confluence details
 CONFLUENCE_URL = os.environ.get("CONFLUENCE_URL")

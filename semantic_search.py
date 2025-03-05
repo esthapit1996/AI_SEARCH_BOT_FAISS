@@ -5,12 +5,12 @@ from sentence_transformers import SentenceTransformer
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 # Constants
 AI_MODEL = "all-MiniLM-L6-v2"
 MAX_RELEVANCE_SCORE = float(os.environ.get("MAX_RELEVANCE_SCORE", -0.3)) #set default value to -0.3
 DATA_FILE = "data.json"
-NUMBER_OF_QUERIES = int(os.environ.get("NUMBER_OF_QUERIES", 5)) #set default value to 5
+NUMBER_OF_QUERIES = int(os.environ.get("NUMBER_OF_QUERIES"), 5) #set default value to 5
 
 class SemanticSearch:
     def __init__(self, model_name=AI_MODEL):
@@ -70,12 +70,17 @@ def main():
 
             if relevance_score >= MAX_RELEVANCE_SCORE:
                 print(f"\nHere are the top {NUMBER_OF_QUERIES} relevant results:\n")
+                cnt = 0
 
                 for best_match, distance in results:
+                    cnt += 1
                     print("-" * (len(best_match["link"]) + 6))
-                    print(f"Title: {best_match['title']}")
-                    print(f"Link: {best_match['link']}")
-                    print(f"Relevance score: {1 - distance:.4f}")
+                    # print(f"Title: {best_match['title']}")
+                    # print(f"URL: {best_match['link']}")
+                    # print(f"Relevance score: {1 - distance:.4f}")
+                    
+                    ## Slack format
+                    print(f"{cnt}. " + "Link: " + f"<{best_match['link']}|{best_match['title']}>")
                     print("-" * (len(best_match["link"]) + 6))
             else:
                 print("No relevant results found.\n")
