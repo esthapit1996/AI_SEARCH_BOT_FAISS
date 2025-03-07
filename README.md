@@ -38,6 +38,7 @@ Install the dependencies from `requirements.txt`, then run the script `platform-
 NOTE: Make sure that the script, .env and spaces.txt file are all in the same folder!
 
 I have also broken down the script for a fetch function and search function:
+
 `fetch_data.py`: Fetches the data and stores them in a json-file.
 
 `semantic_search.py`: Starts the search to give the User an answer from the json-file. This starts a while-loop which can be broken with `q` as a value passed or Keyboard-Interupt.
