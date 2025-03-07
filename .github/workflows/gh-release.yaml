@@ -54,8 +54,5 @@
 #           body: |
 #             This is the release of version ${{ needs.bump-version.outputs.new_version }}.
 #         env:
-# <<<<<<< HEAD
-#           GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-# =======
 #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-# >>>>>>> create-release-versions
+
